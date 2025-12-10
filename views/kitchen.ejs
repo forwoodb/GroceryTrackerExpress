@@ -1,0 +1,83 @@
+<% layout('layouts/boilerplate') %>
+
+<main>
+  <div class="container">
+    <h2>Meal</h2>
+      <table id="meal-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <h2>Kitchen</h2>
+    <form action="/addToKitchen" method="post">
+      <button type="submit" class="btn btn-warning">
+        Add Checked Items to Meal
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Size</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% kitchenItems.forEach((item) => { %>
+          <tr class="listItem">
+            <td>
+              <input
+                type="checkbox"
+                name="inKitchen[]"
+                value="<%= item['_id'] %>"
+                class="listCheckbox"
+              />
+            </td>
+            <td class="countDisplay">
+              <%= item['kitchenAmount'] %>
+            </td>
+            <td><%= item['itemName'] %></td>
+            <td class="price"><%= item['price'] %></td>
+            <td><%= item['brand'] %></td>
+            <td>
+              <div class="portionCounter d-flex align-items-center">
+                <p class="add btn btn-sm">+</p>
+                <p>
+                  <input 
+                    type="text" 
+                    value="<%= item['size'] * item['kitchenAmount'] %>" 
+                    class="kitchenUnits"
+                  />
+                  <%= item['units'] %>
+                </p>
+                <p class="subtract btn btn-sm">-</p>
+              </div>
+            </td>
+            <td><%= item['location'] %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      </form>
+  </div>
+</main>

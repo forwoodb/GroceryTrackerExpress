@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+
+<main>
+  <div class="container">
+    <h1>List</h1>
+    <form action="/addToKitchen" method="post">
+      <button type="submit" class="btn btn-warning">
+        Add Checked Items to Kitchen
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Price Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Size</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% listItems.forEach((item) => { %>
+          <tr class="listItem">
+            <td>
+              <input
+                type="checkbox"
+                name="inKitchen[]"
+                value="<%= item['_id'] %>"
+                class="listCheckbox"
+              />
+            </td>
+            <td>
+              <div class="counter d-flex align-items-center">
+                <p class="add btn btn-sm">+</p>
+                <p>
+                  <input
+                    value="1"
+                    name="listAmount[<%= item['_id'] %>]"
+                    class="countDisplay"
+                  />
+                </p>
+                <p class="subtract btn btn-sm">-</p>
+              </div>
+            </td>
+            <td><%= item['itemName'] %></td>
+            <td class="price"><%= item['price'] %></td>
+            <td><%= item['priceType'] %></td>
+            <td><%= item['brand'] %></td>
+            <td>
+              <%= item['size'] %>
+              <%= item['units'] %>
+            </td>
+            <td><%= item['location'] %></td>
+            <td>
+              <a href="/editItem/<%= item['_id'] %>" class="btn btn-warning"
+                >Edit</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</main>

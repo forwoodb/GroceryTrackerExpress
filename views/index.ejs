@@ -1,0 +1,120 @@
+<% layout('layouts/boilerplate') %>
+
+<main>
+  <div class="container">
+    <h1>Grocery Items</h1>
+    <form action="/createItem" method="post" class="mb-5">
+      <div class="row">
+        <div class="col-md mb-3">
+          <label for="name" class="form-label"> name </label>
+          <input id="name" name="itemName" type="text" class="form-control" />
+        </div>
+        <div class="col-md-5">
+          <label for="price" class="form-label"> price </label>
+          <div class="input-group mb-3">
+            <input
+              id="price"
+              name="price"
+              type="text"
+              class="form-control w-50"
+            />
+            <select class="form-select" name="priceType" id="price_type">
+              <option value="">type</option>
+              <option value="regular">regular</option>
+              <option value="sale">sale</option>
+              <option value="coupon">coupon</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md mb-3">
+          <label for="brand" class="form-label"> brand </label>
+          <input id="brand" name="brand" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label for="size" class="form-label"> size </label>
+          <div class="input-group mb-3">
+            <input
+              id="size"
+              name="size"
+              type="text"
+              class="form-control w-50"
+            />
+            <select class="form-select" name="units" id="units">
+              <option value="units">units</option>
+              <option value="servings">servings</option>
+              <option value="oz">oz</option>
+              <option value="tbsp">tbsp</option>
+              <option value="lbs">lbs</option>
+              <option value="gal">gal</option>
+              <option value="ml">ml</option>
+              <option value="l">l</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md mb-3">
+          <label for="location" class="form-label"> location </label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-warning">Add Item</button>
+    </form>
+    <form action="/addToList" method="post" id="listItems">
+      <button class="btn btn-warning">Add Checked Items to List</button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Price Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Size</th>
+            <th scope="col">Location</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+          <tr>
+            <td>
+              <input
+                type="checkbox"
+                name="inList[]"
+                form="listItems"
+                value="<%= item['_id'] %>"
+              />
+            </td>
+            <td><%= item['itemName'] %></td>
+            <td><%= item['price'] %></td>
+            <td><%= item['priceType'] %></td>
+            <td><%= item['brand'] %></td>
+            <td>
+              <%= item['size'] %>
+              <%= item['units'] %>
+            </td>
+            <td><%= item['location'] %></td>
+            <td>
+              <a href="/editItem/<%= item['_id'] %>" class="btn btn-warning"
+                >Edit</a
+              >
+            </td>
+            <td>
+              <form action="/deleteItem/<%= item['_id'] %>" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</main>

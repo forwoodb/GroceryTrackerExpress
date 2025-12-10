@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %>
+
+<main>
+  <div class="container">
+    <h1>Meal</h1>
+    <button>Add Checked Items to List</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Item</th>
+          <th scope="col">Price</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% mealItems.forEach((item) => { %>
+        <tr>
+          <td><input type="checkbox" name="add" id="" /></td>
+          <td><%= item['itemName'] %></td>
+          <td><%= item['price'] %></td>
+          <td><%= item['brand'] %></td>
+          <td>
+            <%= item['size'] %>
+            <%= item['units'] %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</main>

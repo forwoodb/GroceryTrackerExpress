@@ -1,0 +1,4 @@
+Help Prettier with ejs:
+npm install --save-dev prettier-plugin-ejs
+create .prettierrc
+https://chatgpt.com/c/68afa34a-7f7c-8329-9b9c-65cbfcf70fbe

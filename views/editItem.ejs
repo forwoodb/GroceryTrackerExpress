@@ -1,0 +1,87 @@
+<% layout('layouts/boilerplate') %>
+
+<main>
+  <div class="container">
+    <form action="/updateItem/<%= item['_id'] %>" method="post" class="mb-5">
+      <div class="row">
+        <div class="col-md mb-3">
+          <label for="name" class="form-label"> name </label>
+          <input
+            id="name"
+            name="itemName"
+            type="text"
+            value="<%= item['itemName'] %>"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <label for="price" class="form-label"> price </label>
+          <div class="input-group mb-3">
+            <input
+              id="price"
+              name="price"
+              type="text"
+              value="<%= item['price'] %>"
+              class="form-control w-50"
+            />
+            <select
+              class="form-select"
+              name="priceType"
+              id="price_type"
+            >
+              <option value="">type</option>
+              <option value="regular" <%= item['priceType'] === 'regular' ? 'selected' : '' %> >regular</option>
+              <option value="sale" <%= item['priceType'] === 'sale' ? 'selected' : '' %> >sale</option>
+              <option value="coupon" <%= item['priceType'] === 'coupon' ? 'selected' : '' %> >coupon</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md mb-3">
+          <label for="brand" class="form-label"> brand </label>
+          <input
+            id="brand"
+            name="brand"
+            type="text"
+            value="<%= item['brand'] %>"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label for="size" class="form-label"> size </label>
+          <div class="input-group mb-3">
+            <input
+              id="size"
+              name="size"
+              type="text"
+              value="<%= item['size'] %>"
+              class="form-control w-50"
+            />
+            <select class="form-select" name="units" id="units">
+              <option value="units" <%= item['units'] === 'units' ? 'selected' : '' %> >units</option>
+              <option value="servings" <%= item['units'] === 'servings' ? 'selected' : '' %> >servings</option>
+              <option value="oz" <%= item['units'] === 'oz' ? 'selected' : '' %> >oz</option>
+              <option value="tbsp" <%= item['units'] === 'tbsp' ? 'selected' : '' %> >tbsp</option>
+              <option value="lbs" <%= item['units'] === 'lbs' ? 'selected' : '' %> >lbs</option>
+              <option value="gal" <%= item['units'] === 'gal' ? 'selected' : '' %> >gal</option>
+              <option value="ml" <%= item['units'] === 'ml' ? 'selected' : '' %> >ml</option>
+              <option value="l" <%= item['units'] === 'l' ? 'selected' : '' %> >l</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md mb-3">
+          <label for="location" class="form-label"> location </label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            value="<%= item['location'] %>"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-warning">Update Item</button>
+    </form>
+  </div>
+</main>
