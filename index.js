@@ -8,7 +8,7 @@ dotenv.config();
 
 // DB
 mongoose
-  .connect(process.env.LDB_URL)
+  .connect(process.env.MDB_URL)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
@@ -138,7 +138,7 @@ app.get("/meal", async (req, res) => {
   res.render("meal", { mealItems });
 });
 
-const port = 3003;
+const port = 3003 || process.env.PORT;
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
